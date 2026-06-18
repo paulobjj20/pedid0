@@ -3,208 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenho uma pergunta importante...</title>
+    <title>Pedido Especial</title>
     <style>
-        /* CONFIGURAÇÕES GLOBAIS (Fundo Rosa/Vermelho Romântico) */
+        /* 60% ROSA CLARO - Dominante no fundo da tela */
         body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            width: 100vw;
             height: 100vh;
+            overflow: hidden;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffb7ce; /* Rosa claro marcante como cor dominante */
+            transition: background 1s ease;
         }
 
-        /* CARD PRINCIPAL (Preto Elegante conforme os comentários) */
-        .card-pedido {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        /* 30% PRETO - Título estrutural de forte impacto */
+        h1 {
+            color: #0d0d0d; /* Preto absoluto */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
             text-align: center;
-            max-width: 400px;
-            width: 90%;
-            border: 2px solid #ff4b6e;
-            position: relative;
             z-index: 10;
         }
 
-        /* Animação do Coração do Topo */
-        .coracao-topo {
-            font-size: 50px;
-            margin-bottom: 10px;
-            display: inline-block;
-            animation: pulsar 1.2s infinite;
-        }
-
-        h1 {
-            font-size: 26px;
-            color: #ff4b6e;
-            margin-bottom: 15px;
-        }
-
-        .texto-pedido {
+        /* 20% BRANCO - Espaço para o Texto Personalizado no Meio */
+        .texto-personalizado {
+            background-color: #ffffff; /* Branco */
+            color: #0d0d0d; /* Texto preto para legibilidade */
+            padding: 20px 30px;
+            border-radius: 15px;
+            max-width: 80%;
+            text-align: center;
             font-size: 16px;
-            line-height: 1.6;
-            color: #cccccc;
-            margin-bottom: 20px;
-        }
-
-        /* Frase de Efeito em Branco */
-        .frase-efeito {
-            font-weight: bold;
-            font-size: 16px;
-            color: #ffffff;
+            line-height: 1.5;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
-        /* Zona dos Botões */
-        .botoes-container {
+        .botoes {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 15px;
-            height: 50px;
-            position: relative;
+            gap: 20px;
+            z-index: 10;
         }
 
-        .btn {
-            padding: 12px 30px;
-            font-size: 16px;
+        /* Botões de ação com alto contraste e SEM BORDAS */
+        button {
+            padding: 15px 35px;
+            font-size: 18px;
             font-weight: bold;
+            border: none; /* Borda removida */
             border-radius: 25px;
             cursor: pointer;
-            border: none;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s, background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .btn:hover {
-            transform: scale(1.05);
+        #btnSim {
+            background-color: #ffffff; /* Branco */
+            color: #0d0d0d; /* Texto preto */
         }
 
-        /* Botão SIM (Destaque Branco) */
-        .btn-sim {
-            background-color: #ffffff;
-            color: #ff4b6e;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        #btnSim:hover {
+            transform: scale(1.1);
+            background-color: #e6e6e6;
         }
 
-        .btn-sim:hover {
-            background-color: #ffe6eb;
+        #btnNao {
+            background-color: #0d0d0d; /* Preto */
+            color: #ffffff; /* Texto Branco */
         }
 
-        /* Botão NÃO (Preto Embutido) */
-        .btn-nao {
-            background-color: #2a2a2a;
-            color: #888888;
-            border: 1px solid #3a3a3a;
-            z-index: 1000;
+        /* Estilo para a chuva de elementos visuais */
+        .chuva-coracao {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: cair linear forwards;
         }
 
-        /* Animações Keyframes */
-        @keyframes pulsar {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+        @keyframes cair {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
+        }
+
+        /* Painel de Controle integrado SEM BORDAS (30% Preto / 20% Branco) */
+        .controle-midia {
+            position: fixed;
+            bottom: 20px;
+            background: rgba(13, 13, 13, 0.95); /* Preto */
+            border: none; /* Borda removida */
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .controle-midia label {
+            font-size: 14px;
+            color: #ffffff; /* Branco */
+            font-weight: bold;
+        }
+
+        .controle-midia select {
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: #ffffff; /* Branco */
+            color: #0d0d0d; /* Texto Preto */
+            border: none; /* Borda removida */
+            outline: none;
+            cursor: pointer;
+        }
+
+        #iframeMusica {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <main class="card-pedido">
-        <div class="coracao-topo">❤️</div>
+    <h1>Quer namorar comigo? 😊</h1>
 
-        <div class="conteudo">
-            <h1>Você aceita namorar comigo?</h1>
-            
-            <p class="texto-pedido">
-                Desde que você entrou na minha vida, tudo ficou mais bonito, alegre e cheio de sentido. Não consigo mais imaginar o meu futuro sem o seu sorriso e sem a sua parceria. 
-            </p>
+    <!-- ESPAÇO PARA SEU TEXTO PERSONALIZADO NO MEIO -->
+    <div class="texto-personalizado">
+        Escreva aqui o seu texto personalizado. Você pode colocar uma frase romântica, 
+        contar uma piada interna ou explicar o motivo deste pedido especial! 
+        (Basta apagar este parágrafo no código e escrever o que quiser).
+    </div>
 
-            <p class="frase-efeito">Você aceita dar esse próximo passo juntos?</p>
-            
-            <div class="botoes-container">
-                <button class="btn btn-sim" id="btnSim">SIM!</button>
-                <button class="btn btn-nao" id="btnNao">Não</button>
-            </div>
-        </div>
-    </main>
+    <div class="botoes">
+        <button id="btnSim">SIM!</button>
+        <button id="btnNao">Não</button>
+    </div>
 
-    <!-- Integração do Firebase (Módulos) -->
-    <script type="module">
-        import { initializeApp } from "https://gstatic.com";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://gstatic.com";
+    <!-- Seletor de Música atualizado com o Clipe Oficial de "Stephanie" -->
+    <div class="controle-midia">
+        <label for="seletorMusica">🎵 Trocar Música & Fundo:</label>
+        <select id="seletorMusica">
+            <option value="3elVQh4hz3M" data-bg="#ffb7ce">Nafeesisboujee - Stephanie (Oficial)</option>
+            <option value="Jf6t_G8T2g0" data-bg="#ffc0cb">Tema Rosa Claro</option>
+            <option value="3AtDnEC4zak" data-bg="#ffe4e1">Tema Rosa Névoa</option>
+            <option value="lYBUbBu4W08" data-bg="#ff99b4">Tema Rosa Intenso</option>
+        </select>
+    </div>
 
-        // =========================================================
-        // ATENÇÃO: SUBSTITUA OS DADOS ABAIXO PELOS DADOS DO SEU CONSOLE DO FIREBASE
-        // =========================================================
-        const firebaseConfig = {
-        apiKey: "AIzaSyBpHGHpD04EQBKsyd3lZrmFZHvQxja2kvA",
-        authDomain: "paulo-54b68.firebaseapp.com",
-        projectId: "paulo-54b68",
-        storageBucket: "paulo-54b68.firebasestorage.app",
-        messagingSenderId: "769204790192",
-        appId: "1:769204790192:web:b4cdc80f2c89289b7b6c75",
-        measurementId: "G-CPMD83PDB9"
-};
+    <!-- Iframe configurado para tocar o clipe oficial automaticamente -->
+    <iframe id="iframeMusica" src="https://youtube.com" allow="autoplay"></iframe>
 
-        // Inicializa o Firebase e o Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        let contagemFugas = 0;
+    <script>
+        // --- 1. CONFIGURAÇÃO DOS BOTÕES ---
         const btnSim = document.getElementById('btnSim');
         const btnNao = document.getElementById('btnNao');
+        let contagemFugas = 0;
 
-        // Função para salvar a resposta no banco de dados
-        async function salvarResposta(resultado) {
-            try {
-                await addDoc(collection(db, "respostas_pedido"), {
-                    resposta: resultado,
-                    data: serverTimestamp()
-                });
-                console.log("Resposta salva com sucesso!");
-            } catch (error) {
-                console.error("Erro ao salvar no Firebase:", error);
-            }
-        }
-
-        // Evento de clique no SIM
-        btnSim.addEventListener('click', async () => {
-            alert("Ebaaaa! ❤️ Você me faz a pessoa mais feliz do mundo! Prometo te fazer muito feliz!");
-            await salvarResposta("SIM");
+        btnSim.addEventListener('click', () => {
+            alert('Aeeeee! Sabia que aceitaria! ❤️💍');
         });
 
-        // Evento de clique no NÃO
-        btnNao.addEventListener('click', async () => {
-            alert("Poxa... Que pena! 😢 Vou continuar torcendo por nós dois.");
-            await salvarResposta("NAO");
-        });
-
-        // Lógica de fuga do botão Não
-        btnNao.addEventListener('mouseover', () => {
+        function fugirBotao() {
             if (contagemFugas < 4) {
                 contagemFugas++;
-                const x = Math.random() * (window.innerWidth - btnNao.offsetWidth - 20);
-                const y = Math.random() * (window.innerHeight - btnNao.offsetHeight - 20);
+                const x = Math.random() * (window.innerWidth - btnNao.offsetWidth - 40) + 20;
+                const y = Math.random() * (window.innerHeight - btnNao.offsetHeight - 40) + 20;
                 
                 btnNao.style.position = 'fixed';
                 btnNao.style.left = x + 'px';
                 btnNao.style.top = y + 'px';
             } else {
                 btnNao.style.position = 'static';
-                btnNao.style.cursor = 'pointer';
-                btnNao.style.backgroundColor = '#1f1f1f';
-                btnNao.style.color = '#444444';
-                btnNao.style.borderColor = '#2a2a2a';
+                btnNao.style.cursor = 'not-allowed';
+                btnNao.style.backgroundColor = '#555555';
+                btnNao.style.color = '#222222';
+                btnNao.style.opacity = '0.3';
             }
-        });
-    </script>
+        }
 
+        btnNao.addEventListener('mouseover', fugirBotao);
+        btnNao.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            fugirBotao();
+        });
+
+        // --- 2. CONTROLE DA MÚSICA E MUDANÇA DE FUNDO ---
+        const seletorMusica = document.getElementById('seletorMusica');
+        const iframe = document.getElementById('iframeMusica');
+
+        seletorMusica.addEventListener('change', (e) => {
+            const videoId = e.target.value;
+            const opcaoSelecionada = e.target.options[e.target.selectedIndex];
+            const novoFundo = opcaoSelecionada.getAttribute('data-bg');
+
+            document.body.style.background = novoFundo;
+            iframe.src = `https://youtube.com{videoId}?enablejsapi=1&autoplay=1&mute=0&loop=1`;
+        });
+
+        function iniciarMusicaComSom() {
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '');
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '');
+            }
+            window.removeEventListener('click', iniciarMusicaComSom);
+            window.removeEventListener('mousemove', iniciarMusicaComSom);
+            window.removeEventListener('touchstart', iniciarMusicaComSom);
+        }
+
+        window.addEventListener('click', iniciarMusicaComSom);
+        window.addEventListener('mousemove', iniciarMusicaComSom);
+        window.addEventListener('touchstart', iniciarMusicaComSom);
+
+        // --- 3. CHUVA DE ELEMENTOS (PRETO, BRANCO E ROSA) ---
+        function criarCoracao() {
+            const coracao = document.createElement('div');
+            coracao.classList.add('chuva-coracao');
+            
+            const tipos = ['❤️', '🖤', '🤍', '✨', '🌸'];
+            
+            coracao.innerText = tipos[Math.floor(Math.random() * tipos.length)];
+            coracao.style.left = Math.random() * 100 + "vw";
+            coracao.style.animationDuration = Math.random() * 3 + 3 + "s";
+            coracao.style.fontSize = Math.random() * 15 + 15 + "px";
+            
+            document.body.appendChild(coracao);
+            
+            setTimeout(() => {
+                coracao.remove();
+            }, 6000);
+        }
+
+        setInterval(criarCoracao, 300);
+    </script>
 </body>
 </html>
